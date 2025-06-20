@@ -16,7 +16,6 @@ interface WeightInputProps {
 const WeightInput = ({
   value,
   ranges,
-  presets,
   onChange,
   onPresetClick,
   formatWeight,

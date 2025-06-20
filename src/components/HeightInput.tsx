@@ -16,7 +16,6 @@ interface HeightInputProps {
 const HeightInput = ({
   value,
   ranges,
-  presets,
   onChange,
   onPresetClick,
   formatHeight,
