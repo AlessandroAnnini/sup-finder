@@ -4,21 +4,21 @@
       "name": "All-Around",
       "description": "Perfect for beginners and versatile use",
       "icon": "🏄‍♂️",
-      "volumeMultiplier": 1.0,
+      "volumeMultiplier": 0.95,
       "shapeRatio": {
         "length": 10.5,
         "width": 32,
-        "thickness": 5.5
+        "thickness": 5
       }
     },
     "touring": {
       "name": "Touring",
       "description": "Long-distance paddling and exploration",
       "icon": "🚣‍♂️",
-      "volumeMultiplier": 0.9,
+      "volumeMultiplier": 0.85,
       "shapeRatio": {
         "length": 12.5,
-        "width": 29,
+        "width": 30,
         "thickness": 6
       }
     },
@@ -30,7 +30,7 @@
       "shapeRatio": {
         "length": 10,
         "width": 35,
-        "thickness": 5
+        "thickness": 6
       }
     },
     "surf": {
@@ -59,10 +59,10 @@
       "name": "Fishing",
       "description": "Angling and fishing adventures",
       "icon": "🎣",
-      "volumeMultiplier": 1.15,
+      "volumeMultiplier": 1.2,
       "shapeRatio": {
         "length": 11,
-        "width": 34,
+        "width": 36,
         "thickness": 6
       }
     },
@@ -70,22 +70,22 @@
       "name": "Racing",
       "description": "Speed and competitive performance",
       "icon": "🏁",
-      "volumeMultiplier": 0.75,
+      "volumeMultiplier": 0.9,
       "shapeRatio": {
         "length": 14,
         "width": 26,
-        "thickness": 7
+        "thickness": 6
       }
     },
     "whitewater": {
       "name": "Whitewater",
       "description": "River rapids and challenging conditions",
       "icon": "⛰️",
-      "volumeMultiplier": 0.85,
+      "volumeMultiplier": 1.1,
       "shapeRatio": {
         "length": 9.5,
-        "width": 32,
-        "thickness": 5
+        "width": 36,
+        "thickness": 6
       }
     },
     "expedition": {
@@ -96,7 +96,7 @@
       "shapeRatio": {
         "length": 12,
         "width": 32,
-        "thickness": 6.5
+        "thickness": 6
       }
     }
   },
