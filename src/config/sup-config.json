@@ -1,0 +1,169 @@
+{
+  "boardTypes": {
+    "all-around": {
+      "name": "All-Around",
+      "description": "Perfect for beginners and versatile use",
+      "icon": "🏄‍♂️",
+      "volumeMultiplier": 1.0,
+      "shapeRatio": {
+        "length": 10.5,
+        "width": 32,
+        "thickness": 5.5
+      }
+    },
+    "touring": {
+      "name": "Touring",
+      "description": "Long-distance paddling and exploration",
+      "icon": "🚣‍♂️",
+      "volumeMultiplier": 0.9,
+      "shapeRatio": {
+        "length": 12.5,
+        "width": 29,
+        "thickness": 6
+      }
+    },
+    "cruising": {
+      "name": "Cruising",
+      "description": "Relaxed paddling and leisure activities",
+      "icon": "🌊",
+      "volumeMultiplier": 1.1,
+      "shapeRatio": {
+        "length": 10,
+        "width": 35,
+        "thickness": 5
+      }
+    },
+    "surf": {
+      "name": "Surf",
+      "description": "Riding waves and surf conditions",
+      "icon": "🏄",
+      "volumeMultiplier": 0.8,
+      "shapeRatio": {
+        "length": 9,
+        "width": 29,
+        "thickness": 4.5
+      }
+    },
+    "yoga": {
+      "name": "Yoga",
+      "description": "Stability for yoga and fitness",
+      "icon": "🧘‍♀️",
+      "volumeMultiplier": 1.2,
+      "shapeRatio": {
+        "length": 10.5,
+        "width": 36,
+        "thickness": 6
+      }
+    },
+    "fishing": {
+      "name": "Fishing",
+      "description": "Angling and fishing adventures",
+      "icon": "🎣",
+      "volumeMultiplier": 1.15,
+      "shapeRatio": {
+        "length": 11,
+        "width": 34,
+        "thickness": 6
+      }
+    },
+    "racing": {
+      "name": "Racing",
+      "description": "Speed and competitive performance",
+      "icon": "🏁",
+      "volumeMultiplier": 0.75,
+      "shapeRatio": {
+        "length": 14,
+        "width": 26,
+        "thickness": 7
+      }
+    },
+    "whitewater": {
+      "name": "Whitewater",
+      "description": "River rapids and challenging conditions",
+      "icon": "⛰️",
+      "volumeMultiplier": 0.85,
+      "shapeRatio": {
+        "length": 9.5,
+        "width": 32,
+        "thickness": 5
+      }
+    },
+    "expedition": {
+      "name": "Expedition",
+      "description": "Long expeditions with gear storage",
+      "icon": "🎒",
+      "volumeMultiplier": 1.25,
+      "shapeRatio": {
+        "length": 12,
+        "width": 32,
+        "thickness": 6.5
+      }
+    }
+  },
+  "unitSystems": {
+    "metric": {
+      "name": "Metric",
+      "heightLabel": "cm",
+      "weightLabel": "kg",
+      "ranges": {
+        "height": {
+          "min": 140,
+          "max": 210
+        },
+        "weight": {
+          "min": 40,
+          "max": 120
+        }
+      },
+      "presets": {
+        "height": {
+          "short": 160,
+          "average": 175,
+          "tall": 190
+        },
+        "weight": {
+          "light": 60,
+          "average": 75,
+          "heavy": 90
+        }
+      }
+    },
+    "imperial": {
+      "name": "Imperial",
+      "heightLabel": "inches",
+      "weightLabel": "lbs",
+      "ranges": {
+        "height": {
+          "min": 55,
+          "max": 83
+        },
+        "weight": {
+          "min": 90,
+          "max": 265
+        }
+      },
+      "presets": {
+        "height": {
+          "short": 63,
+          "average": 69,
+          "tall": 75
+        },
+        "weight": {
+          "light": 130,
+          "average": 165,
+          "heavy": 200
+        }
+      }
+    }
+  },
+  "calculationParams": {
+    "baseVolumeMultiplier": 2.2,
+    "averageHeightInches": 70,
+    "heightScalingFactor": 1.0,
+    "widthVolumeScaling": 200
+  },
+  "conversionFactors": {
+    "cmToInches": 2.54,
+    "kgToPounds": 2.20462
+  }
+}
