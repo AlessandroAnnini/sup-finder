@@ -17,6 +17,14 @@ const BoardTypeSchema = z.object({
   shapeRatio: ShapeRatioSchema,
 });
 
+// Zod schema for board material configuration
+const BoardMaterialSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  icon: z.string(),
+  volumeMultiplier: z.number().positive(),
+});
+
 // Zod schema for range configuration
 const RangeSchema = z
   .object({
@@ -80,6 +88,7 @@ const ConversionFactorsSchema = z.object({
 
 // Main configuration schema
 const SupConfigSchema = z.object({
+  boardMaterials: z.record(BoardMaterialSchema),
   boardTypes: z.record(BoardTypeSchema),
   unitSystems: z.object({
     metric: UnitSystemSchema,
@@ -92,6 +101,7 @@ const SupConfigSchema = z.object({
 // Inferred types from Zod schemas
 export type SupConfig = z.infer<typeof SupConfigSchema>;
 export type BoardTypeConfig = z.infer<typeof BoardTypeSchema>;
+export type BoardMaterialConfig = z.infer<typeof BoardMaterialSchema>;
 export type UnitSystemConfig = z.infer<typeof UnitSystemSchema>;
 export type CalculationParams = z.infer<typeof CalculationParamsSchema>;
 export type ShapeRatio = z.infer<typeof ShapeRatioSchema>;
@@ -129,6 +139,19 @@ export const getBoardTypeConfig = (boardType: string): BoardTypeConfig => {
     throw new Error(`Board type '${boardType}' not found in configuration`);
   }
   return boardConfig;
+};
+
+export const getBoardMaterialConfig = (
+  boardMaterial: string
+): BoardMaterialConfig => {
+  const config = getSupConfig();
+  const materialConfig = config.boardMaterials[boardMaterial];
+  if (!materialConfig) {
+    throw new Error(
+      `Board material '${boardMaterial}' not found in configuration`
+    );
+  }
+  return materialConfig;
 };
 
 export const getUnitSystemConfig = (

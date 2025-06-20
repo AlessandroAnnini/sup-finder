@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type {
   UserInput,
   CalculationResult,
   BoardType,
+  BoardMaterial,
   UnitSystem,
 } from '@/types';
-import { calculateSupBoard } from '@/lib/supCalculator';
+import { calculateSupBoard, getBoardMaterialInfo } from '@/lib/supCalculator';
 import { getUnitSystemConfig, getSupConfig } from '@/lib/config';
 import { ModeToggle } from '@/components/mode-toggle';
 import AppHeader from './AppHeader';
@@ -16,12 +17,32 @@ import BoardResults from './BoardResults';
 const SupFinder = () => {
   const [userInput, setUserInput] = useState<UserInput>({
     boardType: 'all-around',
+    boardMaterial: 'inflatable',
     height: 170,
     weight: 70,
     unitSystem: 'metric',
   });
 
   const [result, setResult] = useState<CalculationResult | null>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to results on mobile when they appear
+  useEffect(() => {
+    if (result && resultsRef.current) {
+      // Add a small delay to ensure DOM is fully rendered
+      const scrollToResults = () => {
+        resultsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      };
+
+      // Use timeout to ensure the results card is fully rendered
+      const timeoutId = setTimeout(scrollToResults, 100);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [result]);
 
   // Smart ranges based on unit system from config
   const getRanges = () => {
@@ -65,6 +86,15 @@ const SupFinder = () => {
     }
   };
 
+  // Get board materials from config
+  const getBoardMaterials = () => {
+    try {
+      return getBoardMaterialInfo();
+    } catch {
+      return {};
+    }
+  };
+
   // Format display values
   const formatHeight = (value: number) => {
     try {
@@ -95,6 +125,10 @@ const SupFinder = () => {
   // Event handlers
   const handleBoardTypeChange = (boardType: BoardType) => {
     setUserInput((prev) => ({ ...prev, boardType }));
+  };
+
+  const handleBoardMaterialChange = (boardMaterial: BoardMaterial) => {
+    setUserInput((prev) => ({ ...prev, boardMaterial }));
   };
 
   const handleHeightChange = (height: number) => {
@@ -163,6 +197,7 @@ const SupFinder = () => {
   const ranges = getRanges();
   const presets = getPresets();
   const boardTypes = getBoardTypes();
+  const boardMaterials = getBoardMaterials();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-slate-900 dark:via-blue-900 dark:to-teal-900">
@@ -178,11 +213,13 @@ const SupFinder = () => {
           <InputForm
             userInput={userInput}
             boardTypes={boardTypes}
+            boardMaterials={boardMaterials}
             ranges={ranges}
             presets={presets}
             formatHeight={formatHeight}
             formatWeight={formatWeight}
             onBoardTypeChange={handleBoardTypeChange}
+            onBoardMaterialChange={handleBoardMaterialChange}
             onUnitSystemChange={handleUnitSystemChange}
             onHeightChange={handleHeightChange}
             onWeightChange={handleWeightChange}
@@ -191,7 +228,7 @@ const SupFinder = () => {
             onCalculate={handleCalculate}
           />
 
-          {result && <BoardResults result={result} />}
+          {result && <BoardResults result={result} ref={resultsRef} />}
         </div>
 
         <AppFooter />

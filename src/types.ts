@@ -2,6 +2,7 @@
 export type {
   SupConfig,
   BoardTypeConfig,
+  BoardMaterialConfig,
   UnitSystemConfig,
   CalculationParams,
   ShapeRatio,
@@ -21,8 +22,11 @@ export type BoardType =
 
 export type UnitSystem = 'metric' | 'imperial';
 
+export type BoardMaterial = 'hard' | 'inflatable';
+
 export interface UserInput {
   boardType: BoardType;
+  boardMaterial: BoardMaterial;
   height: number;
   weight: number;
   unitSystem: UnitSystem;

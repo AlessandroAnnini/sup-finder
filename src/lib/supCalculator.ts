@@ -6,15 +6,22 @@ import type {
 } from '@/types';
 import {
   getBoardTypeConfig,
+  getBoardMaterialConfig,
   getCalculationParams,
   getSupConfig,
 } from '@/lib/config';
-import type { BoardTypeConfig } from '@/lib/config';
+import type { BoardTypeConfig, BoardMaterialConfig } from '@/lib/config';
 
 // Get board type info from configuration
 export const getBoardTypeInfo = (): Record<string, BoardTypeConfig> => {
   const config = getSupConfig();
   return config.boardTypes;
+};
+
+// Get board material info from configuration
+export const getBoardMaterialInfo = (): Record<string, BoardMaterialConfig> => {
+  const config = getSupConfig();
+  return config.boardMaterials;
 };
 
 // Convert measurements using config values
@@ -33,16 +40,23 @@ const convertUnits = () => {
   };
 };
 
-// Calculate volume needed based on weight and board type
-const calculateVolume = (weightLbs: number, boardType: string): number => {
+// Calculate volume needed based on weight, board type, and board material
+const calculateVolume = (
+  weightLbs: number,
+  boardType: string,
+  boardMaterial: string
+): number => {
   const params = getCalculationParams();
   const boardConfig = getBoardTypeConfig(boardType);
+  const materialConfig = getBoardMaterialConfig(boardMaterial);
 
   // Base volume calculation using config parameters
   const baseVolume = weightLbs * params.baseVolumeMultiplier;
 
-  // Apply board type multiplier from config
-  return Math.round(baseVolume * boardConfig.volumeMultiplier);
+  // Apply both board type and material multipliers from config
+  return Math.round(
+    baseVolume * boardConfig.volumeMultiplier * materialConfig.volumeMultiplier
+  );
 };
 
 // Calculate board dimensions based on volume and type
@@ -73,10 +87,17 @@ const calculateDimensions = (
 };
 
 // Generate explanation text using config data
-const generateExplanation = (boardType: string, volume: number): string => {
+const generateExplanation = (
+  boardType: string,
+  boardMaterial: string,
+  volume: number
+): string => {
   const boardConfig = getBoardTypeConfig(boardType);
-  return `For ${boardConfig.name.toLowerCase()} paddling, we recommend a board with ${volume}L volume. ${
+  const materialConfig = getBoardMaterialConfig(boardMaterial);
+  return `For ${boardConfig.name.toLowerCase()} paddling with a ${materialConfig.name.toLowerCase()}, we recommend a board with ${volume}L volume. ${
     boardConfig.description
+  }. ${
+    materialConfig.description
   }. This volume provides the right balance of stability and performance for your weight and intended use.`;
 };
 
@@ -96,9 +117,17 @@ export const calculateSupBoard = (input: UserInput): CalculationResult => {
       : input.weight;
 
   // Calculate volume and dimensions
-  const volume = calculateVolume(weightLbs, input.boardType);
+  const volume = calculateVolume(
+    weightLbs,
+    input.boardType,
+    input.boardMaterial
+  );
   const dimensions = calculateDimensions(volume, input.boardType, heightInches);
-  const explanation = generateExplanation(input.boardType, volume);
+  const explanation = generateExplanation(
+    input.boardType,
+    input.boardMaterial,
+    volume
+  );
 
   return {
     dimensions,

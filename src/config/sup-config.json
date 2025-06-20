@@ -1,4 +1,18 @@
 {
+  "boardMaterials": {
+    "hard": {
+      "name": "Hard Board",
+      "description": "Rigid construction for better performance and speed",
+      "icon": "💎",
+      "volumeMultiplier": 0.95
+    },
+    "inflatable": {
+      "name": "Inflatable",
+      "description": "Portable and convenient with excellent stability",
+      "icon": "📦",
+      "volumeMultiplier": 1.15
+    }
+  },
   "boardTypes": {
     "all-around": {
       "name": "All-Around",

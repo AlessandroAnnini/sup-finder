@@ -1,5 +1,5 @@
-import type { UserInput, BoardType, UnitSystem } from '@/types';
-import type { BoardTypeConfig } from '@/lib/config';
+import type { UserInput, BoardType, BoardMaterial, UnitSystem } from '@/types';
+import type { BoardTypeConfig, BoardMaterialConfig } from '@/lib/config';
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import BoardTypeSelector from './BoardTypeSelector';
+import BoardMaterialSelector from './BoardMaterialSelector';
 import UnitSystemSelector from './UnitSystemSelector';
 import HeightInput from './HeightInput';
 import WeightInput from './WeightInput';
@@ -16,6 +17,7 @@ import CalculateButton from './CalculateButton';
 interface InputFormProps {
   userInput: UserInput;
   boardTypes: Record<string, BoardTypeConfig>;
+  boardMaterials: Record<string, BoardMaterialConfig>;
   ranges: {
     height: { min: number; max: number };
     weight: { min: number; max: number };
@@ -27,6 +29,7 @@ interface InputFormProps {
   formatHeight: (value: number) => string;
   formatWeight: (value: number) => string;
   onBoardTypeChange: (value: BoardType) => void;
+  onBoardMaterialChange: (value: BoardMaterial) => void;
   onUnitSystemChange: (value: UnitSystem) => void;
   onHeightChange: (value: number) => void;
   onWeightChange: (value: number) => void;
@@ -38,11 +41,13 @@ interface InputFormProps {
 const InputForm = ({
   userInput,
   boardTypes,
+  boardMaterials,
   ranges,
   presets,
   formatHeight,
   formatWeight,
   onBoardTypeChange,
+  onBoardMaterialChange,
   onUnitSystemChange,
   onHeightChange,
   onWeightChange,
@@ -63,6 +68,12 @@ const InputForm = ({
           value={userInput.boardType}
           boardTypes={boardTypes}
           onChange={onBoardTypeChange}
+        />
+
+        <BoardMaterialSelector
+          value={userInput.boardMaterial}
+          boardMaterials={boardMaterials}
+          onChange={onBoardMaterialChange}
         />
 
         <UnitSystemSelector
